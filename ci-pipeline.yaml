@@ -1,0 +1,43 @@
+# This is the YAML file for a CI pipeline in Azure DevOps
+# It includes two stages: build and test
+
+trigger:
+  branches:
+    include:
+    - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+stages:
+- stage: Build
+  jobs:
+  - job: Build
+    steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '10.x'
+      displayName: 'Install Node.js'
+    - script: |
+        npm install
+        npm run build
+      displayName: 'Build the app'
+    - task: PublishBuildArtifacts@1
+      inputs:
+        pathtoPublish: '$(System.DefaultWorkingDirectory)/dist'
+        artifactName: 'dist'
+        publishLocation: 'Container'
+      displayName: 'Publish build artifacts'
+
+- stage: Test
+  jobs:
+  - job: Test
+    steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '10.x'
+      displayName: 'Install Node.js'
+    - script: |
+        npm install
+        npm run test
+      displayName: 'Run tests'
