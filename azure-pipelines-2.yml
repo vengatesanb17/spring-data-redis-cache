@@ -6,11 +6,11 @@ trigger:
 - main
 
 pool:
-  name: Self-Hosted VM
+  name: demoVm2
 
 steps:
 
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
-    script: 'echo "Install Dependencies"'
+    script: 'echo "Hello, World!"'
