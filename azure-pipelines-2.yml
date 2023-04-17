@@ -1,0 +1,30 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+trigger:
+- main
+
+pool:
+  name: Self-Hosted VM
+
+steps:
+- script: |
+    echo "Installing dependencies..."
+    # Install any dependencies required for your build process
+  displayName: 'Install Dependencies'
+
+- script: |
+    echo "Building application..."
+    # Run your build process
+  displayName: 'Build Application'
+
+- script: |
+    echo "Testing application..."
+    # Run your tests
+  displayName: 'Test Application'
+
+- script: |
+    echo "Deploying application..."
+    # Deploy your application to your self-hosted VM
+  displayName: 'Deploy Application'
